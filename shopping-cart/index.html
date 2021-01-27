@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="removeMobile" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="mobileCount" type="text" class="form-control text-center" value="1">
+                           <button id="addMobile" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5 id="price">$1219</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="caseRemove" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="caseCount" type="text" class="form-control text-center" value="1">
+                           <button id="caseAdd" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5 id="casePrice">$59</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5 id="subTotal">$1,278</h5>
+                        <h5 id="taxAmount" >$0</h5>
+                        <h5 id="grandTotal">$1,278</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      // to get the + button.
+     document.getElementById("addMobile").addEventListener("click", function () {
+         //console.log("click");
+
+         // to get the text where the number will show
+         const mobileInput = document.getElementById("mobileCount");
+         // to convert string to number
+         const mobileCount = parseInt(mobileInput.value);
+
+         // const add= (mobileCount.value)+1;
+         //console.log(mobileCount);
+         // update the number
+         const currentNumber = mobileCount + 1;
+
+         // console.log(currentNumber);
+
+         // display the number
+         mobileInput.value = currentNumber;
+
+         const mobileTotal = currentNumber * 1219;
+         document.getElementById("price").innerText = '$' + mobileTotal;
+         calculateTotal();
+      })
+
+      document.getElementById("removeMobile").addEventListener("click", function () {
+         const mobileInput = document.getElementById("mobileCount");
+         const mobileCount = parseInt(mobileInput.value);
+         //console.log("remove");
+         const mobileRemove = mobileCount - 1;
+         mobileInput.value = mobileRemove;
+         const mobileTotal = (mobileRemove * 1219);
+        
+        // document.getElementById("subTotal");
+         //const SubTotal = parseInt(subTotal.value);
+         document.getElementById("price").innerText = '$' + mobileTotal;
+         calculateTotal();
+         
+
+
+      })  
+
+      document.getElementById("caseRemove").addEventListener("click", function () {
+         const caseInput = document.getElementById("caseCount");
+         const caseDecrease = parseInt(caseInput.value);
+         const caseRemove = caseDecrease - 1;
+         caseInput.value = caseRemove;
+         const caseTotal = caseRemove* 59;
+         document.getElementById("casePrice").innerText= '$'+caseTotal;
+  
+          calculateTotal();
+
+      })
+
+      document.getElementById("caseAdd").addEventListener("click",function(){
+         const caseInput= document.getElementById("caseCount");
+         caseIncrease = parseInt(caseInput.value);
+         caseAdd = caseIncrease+1;
+         caseInput.value = caseAdd;
+         const caseTotal = caseAdd *59;
+         document.getElementById("casePrice").innerText= '$'+caseTotal;
+         calculateTotal();
+
+      }) 
+       
+      function calculateTotal(){
+         const phoneCount = document.getElementById("mobileCount");
+         const phoneInput = parseInt(phoneCount.value);
+         const caseNumCount = document.getElementById("caseCount");
+         const caseInput = parseInt(caseNumCount.value);
+         const totalPrice = phoneInput*1219 + caseInput*59;
+         document.getElementById("subTotal").innerText = totalPrice;
+
+         const tax = Math.round(totalPrice *0.1);
+       
+         document.getElementById("taxAmount").innerText ='$' + tax;
+         const grandTotal = totalPrice +tax;
+         document.getElementById("grandTotal").innerText ='$' + grandTotal;
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </script>
+
+</body>
+
+</html>
